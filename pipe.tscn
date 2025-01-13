@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://dciksnayixhyf"]
+
+[ext_resource type="Script" path="res://pipe.gd" id="1_0tb84"]
+[ext_resource type="Texture2D" uid="uid://den4sx3n8oo4t" path="res://assets/pipe.png" id="2_0vf0n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8j45"]
+size = Vector2(76, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbkuc"]
+size = Vector2(69, 519)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjt0b"]
+size = Vector2(74, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qum6"]
+size = Vector2(66, 493)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gp6s"]
+size = Vector2(22, 139)
+
+[node name="Pipe" type="Area2D" groups=["pipes"]]
+script = ExtResource("1_0tb84")
+
+[node name="Lower" type="Sprite2D" parent="."]
+position = Vector2(0, 4.875)
+scale = Vector2(1, 0.930357)
+texture = ExtResource("2_0vf0n")
+offset = Vector2(0, 350)
+
+[node name="Upper" type="Sprite2D" parent="."]
+texture = ExtResource("2_0vf0n")
+offset = Vector2(0, -350)
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -88)
+shape = SubResource("RectangleShape2D_p8j45")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -367.5)
+shape = SubResource("RectangleShape2D_nbkuc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(0, 87.5)
+shape = SubResource("RectangleShape2D_qjt0b")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(0, 353.5)
+shape = SubResource("RectangleShape2D_6qum6")
+
+[node name="Score_Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score_Area"]
+position = Vector2(43, 1.5)
+shape = SubResource("RectangleShape2D_1gp6s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Score_Area" to="." method="_on_score_area_body_entered"]
