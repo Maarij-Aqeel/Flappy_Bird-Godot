@@ -1,0 +1,118 @@
+[gd_scene load_steps=11 format=3 uid="uid://chcox8be8skkk"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_cyanl"]
+[ext_resource type="Texture2D" uid="uid://nk1yximw2hf1" path="res://assets/images/bg.png" id="1_tg8k6"]
+[ext_resource type="Texture2D" uid="uid://3n38k1j5bl8a" path="res://assets/images/ground.png" id="2_2mje0"]
+[ext_resource type="Texture2D" uid="uid://cf85xlpa6ppx4" path="res://assets/images/bird1.png" id="4_3rm7m"]
+[ext_resource type="Texture2D" uid="uid://bwxeeinbwi5xu" path="res://assets/images/bird2.png" id="5_rfm4g"]
+[ext_resource type="Texture2D" uid="uid://btjc3gfgrfvhi" path="res://assets/images/bird3.png" id="6_pk2a7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waj8d"]
+bg_color = Color(0.85778, 0.485235, 0.353824, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_00707"]
+bg_color = Color(0.513489, 0.220412, 0.17365, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_size = 5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ada37"]
+texture = ExtResource("1_tg8k6")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ljfds"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3rm7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rfm4g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pk2a7")
+}],
+"loop": true,
+"name": &"Main_ani",
+"speed": 10.0
+}]
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cyanl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -84.0
+offset_right = 100.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 27
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 55
+theme_override_styles/focus = SubResource("StyleBoxFlat_waj8d")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_waj8d")
+theme_override_styles/hover = SubResource("StyleBoxFlat_00707")
+theme_override_styles/normal = SubResource("StyleBoxFlat_waj8d")
+text = "Play"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 55
+theme_override_styles/hover = SubResource("StyleBoxFlat_00707")
+theme_override_styles/normal = SubResource("StyleBoxFlat_waj8d")
+text = "Quit"
+
+[node name="Panel" type="Panel" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ada37")
+
+[node name="ground" type="Sprite2D" parent="."]
+position = Vector2(2778.81, 985.5)
+scale = Vector2(2.3567, 2.51786)
+texture = ExtResource("2_2mje0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(438, 304)
+scale = Vector2(1.93137, 2.22222)
+sprite_frames = SubResource("SpriteFrames_ljfds")
+animation = &"Main_ani"
+autoplay = "Main_ani"
+frame_progress = 0.555481
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
